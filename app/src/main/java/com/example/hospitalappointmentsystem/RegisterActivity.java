@@ -16,6 +16,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -24,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView tvLogin;
 
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         tvLogin = findViewById(R.id.tvLogin);
 
         mAuth = FirebaseAuth.getInstance();
+        db= FirebaseFirestore.getInstance();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,12 +94,30 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
 
-                                    Toast.makeText(RegisterActivity.this,
-                                            "Registration Successful",
-                                            Toast.LENGTH_SHORT).show();
+                                    String userId = mAuth.getCurrentUser().getUid();
 
-                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                    finish();
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("name", name);
+                                    user.put("email", email);
+                                    user.put("phone", phone);
+                                    user.put("uid", userId);
+
+                                    db.collection("users")
+                                            .document(userId)
+                                            .set(user)
+                                            .addOnSuccessListener(unused -> {
+                                                Toast.makeText(RegisterActivity.this,
+                                                        "Registration Successful",
+                                                        Toast.LENGTH_SHORT).show();
+
+                                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                                finish();
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Toast.makeText(RegisterActivity.this,
+                                                        e.getMessage(),
+                                                        Toast.LENGTH_LONG).show();
+                                            });
 
                                 } else {
 

@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,14 +18,14 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     TextView tvRegister, tvForgot;
 
-    FirebaseAuth auth;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        auth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -36,9 +35,9 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> loginUser());
 
-        tvRegister.setOnClickListener(v ->
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class))
-        );
+        tvRegister.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+        });
     }
 
     private void loginUser() {
@@ -56,27 +55,27 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        auth.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
 
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,
+                                "Login Successful",
+                                Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(LoginActivity.this,
-                                HomeActivity.class));
+                                DashboardActivity.class));
 
                         finish();
 
                     } else {
 
-                        Toast.makeText(this,
+                        Toast.makeText(LoginActivity.this,
                                 task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
 
                     }
-
                 });
-
     }
 }

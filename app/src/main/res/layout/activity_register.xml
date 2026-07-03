@@ -14,10 +14,15 @@
         android:padding="24dp">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/imgLogo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/hospital" />
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/hospital"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:contentDescription="Hospital Logo" />
 
         <TextView
             android:layout_width="wrap_content"
