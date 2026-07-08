@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    android:paddingTop="40dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/imgDoctor"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/doctor1"/>
+
+                <TextView
+                    android:id="@+id/txtDoctorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Rajesh Sharma"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_marginTop="6dp"/>
+
+                <TextView
+                    android:id="@+id/txtSpecialization"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cardiologist"
+                    android:textColor="#1565C0"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/txtFees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💰 ₹500"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginTop="6dp"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <EditText
+            android:id="@+id/etPatientName"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="👤 Patient Name"
+            android:padding="15dp"/>
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="📞 Phone Number"
+            android:inputType="phone"
+            android:padding="15dp"/>
+
+
+
+        <!-- Add Date Button here -->
+        <Button
+            android:id="@+id/btnSelectDate"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:text="📅 Select Appointment Date"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_edittext"
+            android:textColor="#444444"/>
+
+        <!-- Add Time Button here -->
+        <Button
+            android:id="@+id/btnSelectTime"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="12dp"
+            android:text="🕒 Select Appointment Time"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_edittext"
+            android:textColor="#444444"/>
+
+
+
+        <EditText
+            android:id="@+id/etSymptoms"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_edittext"
+            android:gravity="top"
+            android:hint="📝 Describe your symptoms"
+            android:inputType="textMultiLine"
+            android:padding="15dp"/>
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_button"
+            android:text="Confirm Appointment"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+</ScrollView>

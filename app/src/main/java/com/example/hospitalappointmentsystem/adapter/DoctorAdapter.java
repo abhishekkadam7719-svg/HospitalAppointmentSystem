@@ -1,5 +1,6 @@
 package com.example.hospitalappointmentsystem.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hospitalappointmentsystem.AppointmentActivity;
 import com.example.hospitalappointmentsystem.R;
 import com.example.hospitalappointmentsystem.model.Doctor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
+
+    public void filterList(ArrayList<Doctor> filteredList) {
+        doctorList = filteredList;
+        notifyDataSetChanged();
+    }
 
     private List<Doctor> doctorList;
 
@@ -40,11 +48,36 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
         holder.tvDoctorName.setText(doctor.getName());
         holder.tvSpecialization.setText(doctor.getSpecialization());
-        holder.tvExperience.setText("Experience: " + doctor.getExperience());
+        holder.tvHospital.setText(doctor.getHospital());
+        holder.tvRating.setText("⭐ " + doctor.getRating());        holder.tvExperience.setText("Experience: " + doctor.getExperience());
         holder.tvFees.setText("Consultation Fee: ₹" + doctor.getFees());
         holder.tvAvailability.setText(doctor.getAvailability());
+        int imageRes = holder.itemView.getContext().getResources().getIdentifier(
+                doctor.getImage(),
+                "drawable",
+                holder.itemView.getContext().getPackageName()
+        );
 
-        // We will load the doctor's image from Firebase Storage later.
+        if (imageRes != 0) {
+            holder.imgDoctor.setImageResource(imageRes);
+        } else {
+            holder.imgDoctor.setImageResource(R.drawable.doctor1);
+        }
+
+        holder.btnBook.setOnClickListener(v -> {
+
+            Intent intent = new Intent(v.getContext(), AppointmentActivity.class);
+
+            intent.putExtra("doctorName", doctor.getName());
+            intent.putExtra("specialization", doctor.getSpecialization());
+            intent.putExtra("fees", doctor.getFees());
+            intent.putExtra("doctorImage",doctor.getImage());
+
+            v.getContext().startActivity(intent);
+
+        });
+
+
     }
 
     @Override
@@ -55,12 +88,14 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     public static class DoctorViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgDoctor;
-        TextView tvDoctorName, tvSpecialization, tvExperience, tvFees, tvAvailability;
+        TextView tvDoctorName, tvSpecialization, tvExperience, tvFees, tvAvailability, tvHospital, tvRating;
         Button btnBook;
 
         public DoctorViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            tvHospital = itemView.findViewById(R.id.tvHospital);
+            tvRating = itemView.findViewById(R.id.tvRating);
             imgDoctor = itemView.findViewById(R.id.imgDoctor);
             tvDoctorName = itemView.findViewById(R.id.tvDoctorName);
             tvSpecialization = itemView.findViewById(R.id.tvSpecialization);

@@ -35,6 +35,7 @@ public class DoctorActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         loadDoctors();
+
     }
 
     private void loadDoctors() {

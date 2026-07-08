@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(LoginActivity.this,
-                                DashboardActivity.class));
+                                HomeActivity.class));
 
                         finish();
 

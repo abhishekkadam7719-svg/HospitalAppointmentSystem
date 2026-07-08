@@ -11,6 +11,15 @@ public class Doctor {
     private String rating;
     private String availability;
     private String imageUrl;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public Doctor() {
         // Required empty constructor for Firestore
@@ -28,7 +37,7 @@ public class Doctor {
         this.fees = fees;
         this.rating = rating;
         this.availability = availability;
-        this.imageUrl = imageUrl;
+
     }
 
     public String getDoctorId() {

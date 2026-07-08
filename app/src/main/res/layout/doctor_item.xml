@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="18dp"
     app:cardElevation="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/imgDoctor"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/doctor"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="12dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Doctor Image"/>
+            android:adjustViewBounds="true"
+            android:src="@drawable/doctor1" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:orientation="vertical">
 
             <TextView
@@ -34,16 +34,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dr. Rajesh Sharma"
-                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#1565C0"/>
+                android:textSize="18sp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/tvSpecialization"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cardiologist"
+                android:textColor="#1565C0"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvHospital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City Hospital"
+                android:textColor="#666666"
                 android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐ 4.8"
+                android:textStyle="bold"
+                android:textColor="#FF9800"/>
 
             <TextView
                 android:id="@+id/tvExperience"
@@ -62,15 +79,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Available Today"
-                android:textColor="#2E7D32"
+                android:textColor="#4CAF50"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/btnBook"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book Appointment"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⭐ 4.8"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/btnBook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Book Now"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

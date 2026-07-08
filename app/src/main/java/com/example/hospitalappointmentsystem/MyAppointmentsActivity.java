@@ -2,23 +2,57 @@ package com.example.hospitalappointmentsystem;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.hospitalappointmentsystem.adapter.AppointmentAdapter;
+import com.example.hospitalappointmentsystem.model.Appointment;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
 
 public class MyAppointmentsActivity extends AppCompatActivity {
+
+    RecyclerView recyclerAppointments;
+    AppointmentAdapter adapter;
+    ArrayList<Appointment> appointmentList;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_my_appointments);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        recyclerAppointments = findViewById(R.id.recyclerAppointments);
+
+        recyclerAppointments.setLayoutManager(new LinearLayoutManager(this));
+
+        appointmentList = new ArrayList<>();
+        adapter = new AppointmentAdapter(appointmentList);
+        recyclerAppointments.setAdapter(adapter);
+
+        db = FirebaseFirestore.getInstance();
+
+        loadAppointments();
+    }
+
+    private void loadAppointments() {
+
+        db.collection("appointments")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                    appointmentList.clear();
+
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+
+                        Appointment appointment = document.toObject(Appointment.class);
+                        appointmentList.add(appointment);
+                    }
+
+                    adapter.notifyDataSetChanged();
+                });
     }
 }
