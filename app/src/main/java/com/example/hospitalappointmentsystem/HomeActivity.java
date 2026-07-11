@@ -14,7 +14,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
@@ -31,13 +37,17 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+
 
         setContentView(R.layout.activity_home);
 
         // Initialize Views
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
         cardHeart = findViewById(R.id.cardHeart);
         cardDental = findViewById(R.id.cardDental);
         cardEye = findViewById(R.id.cardEye);
@@ -71,6 +81,8 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
 
         // Category Clicks
         cardHeart.setOnClickListener(v ->
@@ -163,5 +175,35 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         adapter.filterList(filteredList);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+
+
+         if (id == R.id.menu_notification) {
+            startActivity(new Intent(this, NotificationActivity.class));
+            return true;
+
+        } else if (id == R.id.menu_logout) {
+
+            FirebaseAuth.getInstance().signOut();
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -8,36 +8,31 @@ public class Doctor {
     private String experience;
     private String hospital;
     private String fees;
+    private String phone;
     private String rating;
     private String availability;
-    private String imageUrl;
     private String image;
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public Doctor() {
-        // Required empty constructor for Firestore
+        // Required for Firestore
     }
 
-    public Doctor(String doctorId, String name, String specialization,
-                  String experience, String hospital, String fees,
-                  String rating, String availability, String imageUrl) {
+    // Constructor used by AddDoctorActivity
+    public Doctor(String name,
+                  String specialization,
+                  String hospital,
+                  String experience,
+                  String fees,
+                  String phone,
+                  String image) {
 
-        this.doctorId = doctorId;
         this.name = name;
         this.specialization = specialization;
-        this.experience = experience;
         this.hospital = hospital;
+        this.experience = experience;
         this.fees = fees;
-        this.rating = rating;
-        this.availability = availability;
-
+        this.phone = phone;
+        this.image = image;
     }
 
     public String getDoctorId() {
@@ -88,6 +83,14 @@ public class Doctor {
         this.fees = fees;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getRating() {
         return rating;
     }
@@ -104,11 +107,11 @@ public class Doctor {
         this.availability = availability;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String image) {
+        this.image = image;
     }
 }

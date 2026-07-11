@@ -35,9 +35,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> loginUser());
 
-        tvRegister.setOnClickListener(v -> {
-            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-        });
+        tvRegister.setOnClickListener(v ->
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
 
     private void loginUser() {
@@ -64,8 +63,23 @@ public class LoginActivity extends AppCompatActivity {
                                 "Login Successful",
                                 Toast.LENGTH_SHORT).show();
 
-                        startActivity(new Intent(LoginActivity.this,
-                                HomeActivity.class));
+                        String userEmail = FirebaseAuth.getInstance()
+                                .getCurrentUser()
+                                .getEmail();
+
+                        // Change this email to your admin email
+                        if (userEmail.equalsIgnoreCase("admin@gmail.com")) {
+
+                            startActivity(new Intent(
+                                    LoginActivity.this,
+                                    AdminDashboardActivity.class));
+
+                        } else {
+
+                            startActivity(new Intent(
+                                    LoginActivity.this,
+                                    HomeActivity.class));
+                        }
 
                         finish();
 
@@ -74,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this,
                                 task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
-
                     }
                 });
     }

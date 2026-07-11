@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#F1ECE4"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:gravity="center_vertical">
+
+        <!-- Icon -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iconBg"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#D8E9F5">
+
+            <TextView
+                android:id="@+id/tvIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="📅"
+                android:textSize="20sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Text content -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Appointment Confirmed"
+                android:textColor="#2B2118"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Your appointment with Dr. Rajesh Sharma is confirmed for 29/7/2026"
+                android:textColor="#7A6E60"
+                android:textSize="13sp"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="2 hours ago"
+                android:textColor="#B4A896"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <!-- Unread dot -->
+        <View
+            android:id="@+id/unreadDot"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/dot_unread" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

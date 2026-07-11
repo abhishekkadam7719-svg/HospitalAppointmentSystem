@@ -52,16 +52,25 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.tvRating.setText("⭐ " + doctor.getRating());        holder.tvExperience.setText("Experience: " + doctor.getExperience());
         holder.tvFees.setText("Consultation Fee: ₹" + doctor.getFees());
         holder.tvAvailability.setText(doctor.getAvailability());
-        int imageRes = holder.itemView.getContext().getResources().getIdentifier(
-                doctor.getImage(),
-                "drawable",
-                holder.itemView.getContext().getPackageName()
-        );
+        String imageName = doctor.getImage();
 
-        if (imageRes != 0) {
-            holder.imgDoctor.setImageResource(imageRes);
+        if (imageName != null && !imageName.isEmpty()) {
+
+            int imageRes = holder.itemView.getContext().getResources()
+                    .getIdentifier(imageName,
+                            "drawable",
+                            holder.itemView.getContext().getPackageName());
+
+            if (imageRes != 0) {
+                holder.imgDoctor.setImageResource(imageRes);
+            } else {
+                holder.imgDoctor.setImageResource(R.drawable.doctor1);
+            }
+
         } else {
+
             holder.imgDoctor.setImageResource(R.drawable.doctor1);
+
         }
 
         holder.btnBook.setOnClickListener(v -> {
@@ -71,8 +80,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             intent.putExtra("doctorName", doctor.getName());
             intent.putExtra("specialization", doctor.getSpecialization());
             intent.putExtra("fees", doctor.getFees());
-            intent.putExtra("doctorImage",doctor.getImage());
-
+            intent.putExtra("doctorImage", doctor.getImage());
             v.getContext().startActivity(intent);
 
         });
