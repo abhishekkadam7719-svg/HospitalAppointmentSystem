@@ -5,11 +5,11 @@ public class Doctor {
     private String doctorId;
     private String name;
     private String specialization;
-    private String experience;
     private String hospital;
+    private String experience;
     private String fees;
-    private String phone;
     private String rating;
+    private String phone;
     private String availability;
     private String image;
 
@@ -17,13 +17,14 @@ public class Doctor {
         // Required for Firestore
     }
 
-    // Constructor used by AddDoctorActivity
     public Doctor(String name,
                   String specialization,
                   String hospital,
                   String experience,
                   String fees,
+                  String rating,
                   String phone,
+                  String availability,
                   String image) {
 
         this.name = name;
@@ -31,7 +32,9 @@ public class Doctor {
         this.hospital = hospital;
         this.experience = experience;
         this.fees = fees;
+        this.rating = rating;
         this.phone = phone;
+        this.availability = availability;
         this.image = image;
     }
 
@@ -59,20 +62,20 @@ public class Doctor {
         this.specialization = specialization;
     }
 
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
     public String getHospital() {
         return hospital;
     }
 
     public void setHospital(String hospital) {
         this.hospital = hospital;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
     }
 
     public String getFees() {
@@ -83,20 +86,20 @@ public class Doctor {
         this.fees = fees;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getRating() {
         return rating;
     }
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAvailability() {
@@ -111,7 +114,7 @@ public class Doctor {
         return image;
     }
 
-    public void setImageUrl(String image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

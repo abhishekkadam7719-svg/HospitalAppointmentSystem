@@ -2,15 +2,20 @@ package com.example.hospitalappointmentsystem;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hospitalappointmentsystem.adapter.AdminAppointmentAdapter;
 import com.example.hospitalappointmentsystem.model.Appointment;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -27,66 +32,70 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     private TextView tvDoctors, tvPatients, tvAppointments, tvPending;
 
-    private Button btnAddDoctor;
-    private Button btnManageAppointments;
-    private Button btnNotifications;
-    private Button btnLogout;
+    private MaterialCardView btnAddDoctor;
+    private MaterialCardView btnManageAppointments;
+    private MaterialCardView btnNotifications;
+    private MaterialCardView btnManageDoctors;
+    private CardView btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
 
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+        }
+
+        btnLogout = findViewById(R.id.btnLogout);
+
+        btnLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+
+            Intent intent = new Intent(AdminDashboardActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
+
         db = FirebaseFirestore.getInstance();
 
-        // Dashboard Cards
         tvDoctors = findViewById(R.id.tvDoctors);
         tvPatients = findViewById(R.id.tvPatients);
         tvAppointments = findViewById(R.id.tvAppointments);
         tvPending = findViewById(R.id.tvPending);
 
-        // Buttons
         btnAddDoctor = findViewById(R.id.btnAddDoctor);
         btnManageAppointments = findViewById(R.id.btnManageAppointments);
         btnNotifications = findViewById(R.id.btnNotifications);
-        btnLogout = findViewById(R.id.btnLogout);
+        btnManageDoctors = findViewById(R.id.btnManageDoctors);
 
-        // RecyclerView
         recyclerAdminAppointments = findViewById(R.id.recyclerAdminAppointments);
         recyclerAdminAppointments.setLayoutManager(new LinearLayoutManager(this));
-        recyclerAdminAppointments.setNestedScrollingEnabled(false);
 
         appointmentList = new ArrayList<>();
         adapter = new AdminAppointmentAdapter(this, appointmentList);
         recyclerAdminAppointments.setAdapter(adapter);
 
-        // Load data
         loadDashboardCounts();
         loadAppointments();
 
-        // Add Doctor
         btnAddDoctor.setOnClickListener(v ->
                 startActivity(new Intent(this, AddDoctorActivity.class)));
 
-        // Manage Appointments
         btnManageAppointments.setOnClickListener(v ->
                 startActivity(new Intent(this, ManageAppointmentsActivity.class)));
 
-        // Notifications
         btnNotifications.setOnClickListener(v ->
                 startActivity(new Intent(this, NotificationActivity.class)));
 
-        // Logout
-        btnLogout.setOnClickListener(v -> {
-
-            FirebaseAuth.getInstance().signOut();
-
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-
-        });
-
+        btnManageDoctors.setOnClickListener(v ->
+                startActivity(new Intent(this, ManageDoctorsActivity.class)));
     }
 
     private void loadDashboardCounts() {
@@ -124,16 +133,39 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
 
-                        Appointment appointment = document.toObject(Appointment.class);
-                        appointment.setId(document.getId());
-                        appointmentList.add(appointment);
+                        Appointment appointment =
+                                document.toObject(Appointment.class);
 
+                        appointment.setId(document.getId());
+
+                        appointmentList.add(appointment);
                     }
 
                     adapter.notifyDataSetChanged();
-
                 });
-
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_admin, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.menu_logout) {
+
+            FirebaseAuth.getInstance().signOut();
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -2,6 +2,7 @@ package com.example.hospitalappointmentsystem;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Calendar;
-import java.util.HashMap;
 
 public class AppointmentActivity extends AppCompatActivity {
 
@@ -25,10 +23,13 @@ public class AppointmentActivity extends AppCompatActivity {
     EditText etPatientName, etPhone, etSymptoms;
     Button btnConfirm, btnSelectDate, btnSelectTime;
 
-    FirebaseFirestore db;
-
     String selectedDate = "";
     String selectedTime = "";
+
+    String doctorName;
+    String specialization;
+    String fees;
+    String imageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +51,15 @@ public class AppointmentActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.etPhone);
         etSymptoms = findViewById(R.id.etSymptoms);
 
-        btnConfirm = findViewById(R.id.btnConfirm);
         btnSelectDate = findViewById(R.id.btnSelectDate);
         btnSelectTime = findViewById(R.id.btnSelectTime);
+        btnConfirm = findViewById(R.id.btnConfirm);
 
-        db = FirebaseFirestore.getInstance();
-
-        // Receive data
-        String doctorName = getIntent().getStringExtra("doctorName");
-        String specialization = getIntent().getStringExtra("specialization");
-        String fees = getIntent().getStringExtra("fees");
-        String imageName = getIntent().getStringExtra("doctorImage");
+        // Receive doctor data
+        doctorName = getIntent().getStringExtra("doctorName");
+        specialization = getIntent().getStringExtra("specialization");
+        fees = getIntent().getStringExtra("fees");
+        imageName = getIntent().getStringExtra("doctorImage");
 
         txtDoctorName.setText(doctorName);
         txtSpecialization.setText(specialization);
@@ -112,15 +111,18 @@ public class AppointmentActivity extends AppCompatActivity {
             dialog.show();
         });
 
-        // Confirm Appointment
+        // Continue to Payment
         btnConfirm.setOnClickListener(v -> {
 
             String patientName = etPatientName.getText().toString().trim();
             String phone = etPhone.getText().toString().trim();
             String symptoms = etSymptoms.getText().toString().trim();
 
-            if (patientName.isEmpty() || phone.isEmpty() || symptoms.isEmpty()
-                    || selectedDate.isEmpty() || selectedTime.isEmpty()) {
+            if (patientName.isEmpty() ||
+                    phone.isEmpty() ||
+                    symptoms.isEmpty() ||
+                    selectedDate.isEmpty() ||
+                    selectedTime.isEmpty()) {
 
                 Toast.makeText(this,
                         "Please fill all fields",
@@ -128,30 +130,22 @@ public class AppointmentActivity extends AppCompatActivity {
                 return;
             }
 
-            HashMap<String, Object> appointment = new HashMap<>();
+            Intent intent = new Intent(AppointmentActivity.this, PaymentActivity.class);
 
-            appointment.put("doctorName", doctorName);
-            appointment.put("specialization", specialization);
-            appointment.put("fees", fees);
-            appointment.put("patientName", patientName);
-            appointment.put("phone", phone);
-            appointment.put("symptoms", symptoms);
-            appointment.put("date", selectedDate);
-            appointment.put("time", selectedTime);
-            appointment.put("status", "Pending");
+            intent.putExtra("doctorName", doctorName);
+            intent.putExtra("specialization", specialization);
+            intent.putExtra("fees", fees);
+            intent.putExtra("doctorImage", imageName);
 
-            db.collection("appointments")
-                    .add(appointment)
-                    .addOnSuccessListener(documentReference -> {
-                        Toast.makeText(this,
-                                "Appointment Booked Successfully!",
-                                Toast.LENGTH_LONG).show();
-                        finish();
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(this,
-                                    "Failed: " + e.getMessage(),
-                                    Toast.LENGTH_SHORT).show());
+            intent.putExtra("patientName", patientName);
+            intent.putExtra("phone", phone);
+            intent.putExtra("symptoms", symptoms);
+
+            intent.putExtra("date", selectedDate);
+            intent.putExtra("time", selectedTime);
+
+            startActivity(intent);
         });
+
     }
 }

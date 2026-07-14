@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,129 +9,204 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical">
+      android:orientation="vertical"
+      android:paddingBottom="24dp">
 
     <!-- Header -->
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="#1565C0"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:gravity="center_vertical">
+        android:background="@drawable/bg_admin_header">
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Admin Dashboard"
-          android:textColor="@android:color/white"
-          android:textStyle="bold"
-          android:textSize="30sp"/>
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          android:background="@android:color/transparent"
+          android:elevation="0dp"
+          app:title=""
+          app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-      <TextView
-          android:layout_width="wrap_content"
+      <LinearLayout
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Hospital Management System"
-          android:textColor="@android:color/white"
-          android:textSize="16sp"/>
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:padding="20dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="28dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Admin Dashboard"
+              android:textColor="@android:color/white"
+              android:textStyle="bold"
+              android:textSize="26sp" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="4dp"
+              android:alpha="0.85"
+              android:text="Hospital Management System"
+              android:textColor="@android:color/white"
+              android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnLogout"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="26dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#2E7BC7">
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:text="🚪"
+              android:textSize="20sp" />
+
+        </androidx.cardview.widget.CardView>
+
+      </LinearLayout>
 
     </LinearLayout>
 
-    <!-- Statistics Title -->
-
+    <!-- Statistics -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
         android:text="Statistics"
+        android:textColor="#1A2B3C"
         android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_margin="16dp"/>
+        android:textSize="19sp" />
 
     <!-- Row 1 -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp">
 
-      <!-- Doctors Card -->
-
+      <!-- Doctors -->
       <com.google.android.material.card.MaterialCardView
           android:layout_width="0dp"
-          android:layout_height="120dp"
+          android:layout_height="130dp"
           android:layout_weight="1"
-          android:layout_margin="8dp"
-          app:cardCornerRadius="18dp"
-          app:cardBackgroundColor="#2196F3">
+          android:layout_margin="6dp"
+          app:cardCornerRadius="20dp"
+          app:cardElevation="4dp"
+          app:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="14dp">
 
-          <TextView
-              android:text="👨‍⚕️"
-              android:textSize="28sp"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+          <androidx.cardview.widget.CardView
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="0dp"
+              app:cardBackgroundColor="#E3F0FF">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="👨‍⚕️"
+                android:textSize="18sp" />
+
+          </androidx.cardview.widget.CardView>
 
           <TextView
               android:id="@+id/tvDoctors"
-              android:text="0"
-              android:textColor="@android:color/white"
-              android:textStyle="bold"
-              android:textSize="26sp"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="0"
+              android:textColor="#1A2B3C"
+              android:textSize="26sp"
+              android:textStyle="bold" />
 
           <TextView
-              android:text="Doctors"
-              android:textColor="@android:color/white"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:text="Doctors"
+              android:textColor="#8C97A3"
+              android:textSize="13sp" />
 
         </LinearLayout>
 
       </com.google.android.material.card.MaterialCardView>
 
-      <!-- Patients Card -->
-
+      <!-- Patients -->
       <com.google.android.material.card.MaterialCardView
           android:layout_width="0dp"
-          android:layout_height="120dp"
+          android:layout_height="130dp"
           android:layout_weight="1"
-          android:layout_margin="8dp"
-          app:cardCornerRadius="18dp"
-          app:cardBackgroundColor="#4CAF50">
+          android:layout_margin="6dp"
+          app:cardCornerRadius="20dp"
+          app:cardElevation="4dp"
+          app:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="14dp">
 
-          <TextView
-              android:text="👤"
-              android:textSize="28sp"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+          <androidx.cardview.widget.CardView
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="0dp"
+              app:cardBackgroundColor="#E3F8E9">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="👤"
+                android:textSize="18sp" />
+
+          </androidx.cardview.widget.CardView>
 
           <TextView
               android:id="@+id/tvPatients"
-              android:text="0"
-              android:textColor="@android:color/white"
-              android:textStyle="bold"
-              android:textSize="26sp"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="0"
+              android:textColor="#1A2B3C"
+              android:textSize="26sp"
+              android:textStyle="bold" />
 
           <TextView
-              android:text="Patients"
-              android:textColor="@android:color/white"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:text="Patients"
+              android:textColor="#8C97A3"
+              android:textSize="13sp" />
 
         </LinearLayout>
 
@@ -141,62 +215,153 @@
     </LinearLayout>
 
     <!-- Row 2 -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp">
 
       <!-- Appointments -->
-
       <com.google.android.material.card.MaterialCardView
           android:layout_width="0dp"
-          android:layout_height="120dp"
+          android:layout_height="130dp"
           android:layout_weight="1"
-          android:layout_margin="8dp"
-          app:cardCornerRadius="18dp"
-          app:cardBackgroundColor="#9C27B0">
+          android:layout_margin="6dp"
+          app:cardCornerRadius="20dp"
+          app:cardElevation="4dp"
+          app:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="14dp">
 
-          <TextView
-              android:text="📅"
-              android:textSize="28sp"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+          <androidx.cardview.widget.CardView
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="0dp"
+              app:cardBackgroundColor="#F3E7FA">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="📅"
+                android:textSize="18sp" />
+
+          </androidx.cardview.widget.CardView>
 
           <TextView
               android:id="@+id/tvAppointments"
-              android:text="0"
-              android:textColor="@android:color/white"
-              android:textStyle="bold"
-              android:textSize="26sp"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="0"
+              android:textColor="#1A2B3C"
+              android:textSize="26sp"
+              android:textStyle="bold" />
 
           <TextView
-              android:text="Appointments"
-              android:textColor="@android:color/white"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:text="Appointments"
+              android:textColor="#8C97A3"
+              android:textSize="13sp" />
 
         </LinearLayout>
 
       </com.google.android.material.card.MaterialCardView>
 
       <!-- Pending -->
-
       <com.google.android.material.card.MaterialCardView
           android:layout_width="0dp"
-          android:layout_height="120dp"
+          android:layout_height="130dp"
           android:layout_weight="1"
-          android:layout_margin="8dp"
+          android:layout_margin="6dp"
+          app:cardCornerRadius="20dp"
+          app:cardElevation="4dp"
+          app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+          <androidx.cardview.widget.CardView
+              android:layout_width="40dp"
+              android:layout_height="40dp"
+              app:cardCornerRadius="12dp"
+              app:cardElevation="0dp"
+              app:cardBackgroundColor="#FFF1DE">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="⏳"
+                android:textSize="18sp" />
+
+          </androidx.cardview.widget.CardView>
+
+          <TextView
+              android:id="@+id/tvPending"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:text="0"
+              android:textColor="#1A2B3C"
+              android:textSize="26sp"
+              android:textStyle="bold" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Pending"
+              android:textColor="#8C97A3"
+              android:textSize="13sp" />
+
+        </LinearLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- Quick Actions -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="26dp"
+        android:text="Quick Actions"
+        android:textColor="#1A2B3C"
+        android:textStyle="bold"
+        android:textSize="19sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp">
+
+      <!-- Add Doctor -->
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/btnAddDoctor"
+          android:layout_width="0dp"
+          android:layout_height="100dp"
+          android:layout_weight="1"
+          android:layout_margin="6dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:foreground="?attr/selectableItemBackground"
           app:cardCornerRadius="18dp"
-          app:cardBackgroundColor="#FF9800">
+          app:cardElevation="2dp"
+          app:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,107 +370,191 @@
             android:orientation="vertical">
 
           <TextView
-              android:text="⏳"
-              android:textSize="28sp"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:text="➕"
+              android:textSize="26sp" />
 
           <TextView
-              android:id="@+id/tvPending"
-              android:text="0"
-              android:textColor="@android:color/white"
-              android:textStyle="bold"
-              android:textSize="26sp"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:text="Add Doctor"
+              android:textColor="#1A2B3C"
+              android:textSize="13sp"
+              android:textStyle="bold" />
+
+        </LinearLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <!-- Manage Appointments -->
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/btnManageAppointments"
+          android:layout_width="0dp"
+          android:layout_height="100dp"
+          android:layout_weight="1"
+          android:layout_margin="6dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:foreground="?attr/selectableItemBackground"
+          app:cardCornerRadius="18dp"
+          app:cardElevation="2dp"
+          app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
           <TextView
-              android:text="Pending"
-              android:textColor="@android:color/white"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:text="📅"
+              android:textSize="26sp" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:text="Appointments"
+              android:textColor="#1A2B3C"
+              android:textSize="13sp"
+              android:textStyle="bold" />
 
         </LinearLayout>
 
       </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-    <!-- Quick Actions -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quick Actions"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_margin="16dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp">
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp">
 
-      <Button
-          android:id="@+id/btnAddDoctor"
-          android:layout_width="0dp"
-          android:layout_height="55dp"
-          android:layout_weight="1"
-          android:layout_margin="6dp"
-          android:text="➕ Add Doctor"/>
-
-      <Button
-          android:id="@+id/btnManageAppointments"
-          android:layout_width="0dp"
-          android:layout_height="55dp"
-          android:layout_weight="1"
-          android:layout_margin="6dp"
-          android:text="📅 Appointments"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp">
-
-      <Button
+      <!-- Notifications -->
+      <com.google.android.material.card.MaterialCardView
           android:id="@+id/btnNotifications"
           android:layout_width="0dp"
-          android:layout_height="55dp"
+          android:layout_height="100dp"
           android:layout_weight="1"
           android:layout_margin="6dp"
-          android:text="🔔 Notifications"/>
+          android:clickable="true"
+          android:focusable="true"
+          android:foreground="?attr/selectableItemBackground"
+          app:cardCornerRadius="18dp"
+          app:cardElevation="2dp"
+          app:cardBackgroundColor="@android:color/white">
 
-      <Button
-          android:id="@+id/btnLogout"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="🔔"
+              android:textSize="26sp" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:text="Notifications"
+              android:textColor="#1A2B3C"
+              android:textSize="13sp"
+              android:textStyle="bold" />
+
+        </LinearLayout>
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <!-- Manage Doctors -->
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/btnManageDoctors"
           android:layout_width="0dp"
-          android:layout_height="55dp"
+          android:layout_height="100dp"
           android:layout_weight="1"
           android:layout_margin="6dp"
-          android:text="🚪 Logout"/>
+          android:clickable="true"
+          android:focusable="true"
+          android:foreground="?attr/selectableItemBackground"
+          app:cardCornerRadius="18dp"
+          app:cardElevation="2dp"
+          app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="👨‍⚕️"
+              android:textSize="26sp" />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="6dp"
+              android:text="Manage Doctors"
+              android:textColor="#1A2B3C"
+              android:textSize="13sp"
+              android:textStyle="bold" />
+
+        </LinearLayout>
+
+      </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
     <!-- Recent Appointments -->
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recent Appointments"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_margin="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginTop="26dp">
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Recent Appointments"
+          android:textColor="#1A2B3C"
+          android:textStyle="bold"
+          android:textSize="19sp" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="View all →"
+          android:textColor="#1565C0"
+          android:textSize="13sp"
+          android:textStyle="bold" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAdminAppointments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:nestedScrollingEnabled="false"
-        android:padding="8dp"/>
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp"
+        android:clipToPadding="false" />
 
   </LinearLayout>
 

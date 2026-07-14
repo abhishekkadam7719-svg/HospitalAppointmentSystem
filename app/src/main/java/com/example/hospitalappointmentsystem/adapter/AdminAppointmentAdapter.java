@@ -2,10 +2,11 @@ package com.example.hospitalappointmentsystem.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,27 +47,49 @@ public class AdminAppointmentAdapter extends RecyclerView.Adapter<AdminAppointme
         Appointment appointment = appointmentList.get(position);
 
         holder.tvDoctorName.setText(appointment.getDoctorName());
-        holder.tvPatientName.setText("Patient: " + appointment.getPatientName());
-        holder.tvDate.setText("Date: " + appointment.getDate());
-        holder.tvTime.setText("Time: " + appointment.getTime());
-        holder.tvPhone.setText("Phone: " + appointment.getPhone());
-        holder.tvStatus.setText("Status: " + appointment.getStatus());
+        holder.tvPatientName.setText(appointment.getPatientName());
+        holder.tvDate.setText(appointment.getDate());
+        holder.tvTime.setText(appointment.getTime());
+        holder.tvPhone.setText(appointment.getPhone());
 
-        // Update buttons according to status
-        if ("Approved".equalsIgnoreCase(appointment.getStatus())) {
-            holder.btnApprove.setText("Approved");
-            holder.btnApprove.setEnabled(false);
-        } else {
-            holder.btnApprove.setText("Approve");
-            holder.btnApprove.setEnabled(true);
+        // Status badge
+        switch (appointment.getStatus()) {
+            case "Approved":
+                holder.statusBadge.setBackgroundResource(R.drawable.bg_status_approved);
+                holder.tvStatus.setTextColor(Color.parseColor("#2E9E5B"));
+                holder.tvStatus.setText("Approved");
+                break;
+            case "Rejected":
+                holder.statusBadge.setBackgroundResource(R.drawable.bg_status_rejected);
+                holder.tvStatus.setTextColor(Color.parseColor("#E53935"));
+                holder.tvStatus.setText("Rejected");
+                break;
+            default:
+                holder.statusBadge.setBackgroundResource(R.drawable.bg_status_pending);
+                holder.tvStatus.setTextColor(Color.parseColor("#F57C00"));
+                holder.tvStatus.setText("Pending");
         }
 
+        // Approve button state
+        if ("Approved".equalsIgnoreCase(appointment.getStatus())) {
+            holder.btnApprove.setText("Approved");
+            holder.btnApprove.setAlpha(0.5f);
+            holder.btnApprove.setClickable(false);
+        } else {
+            holder.btnApprove.setText("Approve");
+            holder.btnApprove.setAlpha(1f);
+            holder.btnApprove.setClickable(true);
+        }
+
+        // Reject button state
         if ("Rejected".equalsIgnoreCase(appointment.getStatus())) {
             holder.btnReject.setText("Rejected");
-            holder.btnReject.setEnabled(false);
+            holder.btnReject.setAlpha(0.5f);
+            holder.btnReject.setClickable(false);
         } else {
             holder.btnReject.setText("Reject");
-            holder.btnReject.setEnabled(true);
+            holder.btnReject.setAlpha(1f);
+            holder.btnReject.setClickable(true);
         }
 
         // Approve Appointment
@@ -140,12 +163,14 @@ public class AdminAppointmentAdapter extends RecyclerView.Adapter<AdminAppointme
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout statusBadge;
         TextView tvDoctorName, tvPatientName, tvDate, tvTime, tvPhone, tvStatus;
-        Button btnApprove, btnReject, btnDelete;
+        TextView btnApprove, btnReject, btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            statusBadge = itemView.findViewById(R.id.statusBadge);
             tvDoctorName = itemView.findViewById(R.id.tvDoctorName);
             tvPatientName = itemView.findViewById(R.id.tvPatientName);
             tvDate = itemView.findViewById(R.id.tvDate);

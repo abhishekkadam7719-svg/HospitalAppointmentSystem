@@ -2,9 +2,13 @@ package com.example.hospitalappointmentsystem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,15 +16,10 @@ import com.example.hospitalappointmentsystem.adapter.DoctorAdapter;
 import com.example.hospitalappointmentsystem.model.Doctor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
-import androidx.appcompat.widget.Toolbar;
-import androidx.annotation.NonNull;
 
-import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
@@ -36,25 +35,21 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
         setContentView(R.layout.activity_home);
 
-        // Initialize Views
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+
         cardHeart = findViewById(R.id.cardHeart);
         cardDental = findViewById(R.id.cardDental);
         cardEye = findViewById(R.id.cardEye);
         cardBone = findViewById(R.id.cardBone);
 
         searchView = findViewById(R.id.searchView);
-
         recyclerTopDoctors = findViewById(R.id.recyclerTopDoctors);
         bottomNav = findViewById(R.id.bottomNav);
 
@@ -72,7 +67,8 @@ public class HomeActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                searchDoctors(query);
+                return true;
             }
 
             @Override
@@ -82,20 +78,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Categories
+        cardHeart.setOnClickListener(v -> filterDoctorsByCategory("Cardiologist"));
 
+        cardDental.setOnClickListener(v -> filterDoctorsByCategory("Dentist"));
 
-        // Category Clicks
-        cardHeart.setOnClickListener(v ->
-                filterDoctorsByCategory("Cardiologist"));
+        cardEye.setOnClickListener(v -> filterDoctorsByCategory("Ophthalmologist"));
 
-        cardDental.setOnClickListener(v ->
-                filterDoctorsByCategory("Dentist"));
-
-        cardEye.setOnClickListener(v ->
-                filterDoctorsByCategory("Ophthalmologist"));
-
-        cardBone.setOnClickListener(v ->
-                filterDoctorsByCategory("Orthopedic"));
+        cardBone.setOnClickListener(v -> filterDoctorsByCategory("Orthopedic"));
 
         // Bottom Navigation
         bottomNav.setSelectedItemId(R.id.nav_home);
@@ -108,14 +98,17 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
 
             } else if (id == R.id.nav_doctors) {
+
                 startActivity(new Intent(HomeActivity.this, DoctorActivity.class));
                 return true;
 
             } else if (id == R.id.nav_appointments) {
+
                 startActivity(new Intent(HomeActivity.this, MyAppointmentsActivity.class));
                 return true;
 
             } else if (id == R.id.nav_profile) {
+
                 startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
                 return true;
             }
@@ -124,7 +117,6 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    // Load Doctors
     private void loadDoctors() {
 
         db.collection("doctors")
@@ -139,20 +131,27 @@ public class HomeActivity extends AppCompatActivity {
                         doctorList.add(doctor);
                     }
 
-                    adapter.notifyDataSetChanged();
+                    adapter.filterList(new ArrayList<>(doctorList));
 
                 });
     }
-
     // Search Doctors
     private void searchDoctors(String text) {
+
+        if (text == null || text.trim().isEmpty()) {
+            adapter.filterList(new ArrayList<>(doctorList));
+            return;
+        }
 
         ArrayList<Doctor> filteredList = new ArrayList<>();
 
         for (Doctor doctor : doctorList) {
 
-            if (doctor.getName().toLowerCase().contains(text.toLowerCase())
-                    || doctor.getSpecialization().toLowerCase().contains(text.toLowerCase())) {
+            String name = doctor.getName() == null ? "" : doctor.getName();
+            String specialization = doctor.getSpecialization() == null ? "" : doctor.getSpecialization();
+
+            if (name.toLowerCase().contains(text.toLowerCase())
+                    || specialization.toLowerCase().contains(text.toLowerCase())) {
 
                 filteredList.add(doctor);
             }
@@ -161,14 +160,15 @@ public class HomeActivity extends AppCompatActivity {
         adapter.filterList(filteredList);
     }
 
-    // Filter Category
+    // Filter Doctors by Category
     private void filterDoctorsByCategory(String specialization) {
 
         ArrayList<Doctor> filteredList = new ArrayList<>();
 
         for (Doctor doctor : doctorList) {
 
-            if (doctor.getSpecialization().equalsIgnoreCase(specialization)) {
+            if (doctor.getSpecialization() != null &&
+                    doctor.getSpecialization().equalsIgnoreCase(specialization)) {
 
                 filteredList.add(doctor);
             }
@@ -176,6 +176,7 @@ public class HomeActivity extends AppCompatActivity {
 
         adapter.filterList(filteredList);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
@@ -187,9 +188,8 @@ public class HomeActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
+        if (id == R.id.menu_notification) {
 
-
-         if (id == R.id.menu_notification) {
             startActivity(new Intent(this, NotificationActivity.class));
             return true;
 
@@ -201,6 +201,7 @@ public class HomeActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
 
+            finish();
             return true;
         }
 

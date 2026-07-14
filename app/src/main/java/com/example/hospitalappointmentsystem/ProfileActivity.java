@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Spinner spinnerGender;
     private Button btnSaveProfile, btnLogout;
     private ImageView imgProfile;
+    private TextView tvChangePhoto;
 
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
@@ -37,9 +39,12 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        tvChangePhoto = findViewById(R.id.tvChangePhoto);
+
         // Init views
         etFullName = findViewById(R.id.etFullName);
         etEmail = findViewById(R.id.etEmail);
+        etEmail.setEnabled(false);
         etPhone = findViewById(R.id.etPhone);
         etDob = findViewById(R.id.etDob);
         etBloodGroup = findViewById(R.id.etBloodGroup);
@@ -68,6 +73,12 @@ public class ProfileActivity extends AppCompatActivity {
         btnSaveProfile.setOnClickListener(v -> saveProfileData());
 
         btnLogout.setOnClickListener(v -> logoutUser());
+
+        imgProfile.setOnClickListener(v ->
+                Toast.makeText(this, "Profile photo feature coming next", Toast.LENGTH_SHORT).show());
+
+        tvChangePhoto.setOnClickListener(v ->
+                imgProfile.performClick());
     }
 
     private void loadProfileData() {
@@ -125,8 +136,21 @@ public class ProfileActivity extends AppCompatActivity {
         String bloodGroup = etBloodGroup.getText().toString().trim();
         String address = etAddress.getText().toString().trim();
 
-        if (fullName.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-            Toast.makeText(this, "Please fill in required fields", Toast.LENGTH_SHORT).show();
+        if (fullName.isEmpty()) {
+            etFullName.setError("Enter Full Name");
+            etFullName.requestFocus();
+            return;
+        }
+
+        if (phone.isEmpty()) {
+            etPhone.setError("Enter Phone Number");
+            etPhone.requestFocus();
+            return;
+        }
+
+        if (phone.length() != 10) {
+            etPhone.setError("Enter a valid 10-digit phone number");
+            etPhone.requestFocus();
             return;
         }
 

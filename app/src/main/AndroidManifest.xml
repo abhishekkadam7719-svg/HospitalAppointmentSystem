@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HospitalAppointmentSystem">
         <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditDoctorActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManageAppointmentsActivity"
             android:exported="false" />
         <activity

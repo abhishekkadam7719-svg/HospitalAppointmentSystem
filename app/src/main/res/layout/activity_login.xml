@@ -1,106 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <!-- Background Image -->
+    <!-- Background Image (top portion only) -->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/loginbg"
-        android:scaleType="centerCrop" />
+        android:layout_height="360dp"
+        android:layout_gravity="top"
+        android:scaleType="centerCrop"
+        android:src="@drawable/register" />
 
-    <!-- Login Content -->
+    <!-- Dark gradient overlay for logo contrast -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_gravity="top"
+        android:background="@drawable/bg_login_overlay" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="24dp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imgLogo"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/hospital"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:contentDescription="Hospital Logo" />
+            <!-- Logo + Welcome text over image -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="60dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Welcome Back"
-                android:textColor="#1565C0"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="8dp"
+                    app:cardBackgroundColor="@android:color/white">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login to continue"
-                android:textColor="#555555"/>
+                    <ImageView
+                        android:id="@+id/imgLogo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp"
+                        android:src="@drawable/hospital"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Hospital Logo" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Welcome Back"
+                    android:textColor="@android:color/white"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:alpha="0.9"
+                    android:text="Login to continue"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- Form Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="-32dp"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/white">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:orientation="vertical"
+                    android:padding="28dp"
+                    android:paddingBottom="36dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:endIconMode="password_toggle">
+                    <!-- Email -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        app:startIconDrawable="@android:drawable/ic_dialog_email">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:inputType="textPassword"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Email"
+                            android:textSize="16sp"
+                            android:inputType="textEmailAddress" />
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="20dp"
-                android:text="LOGIN"
-                android:textColor="@android:color/white"
-                android:backgroundTint="#3F51B5"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Create New Account"
-                android:textStyle="bold"
-                android:textColor="#1565C0"/>
+                    <!-- Password -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        app:endIconMode="password_toggle"
+                        app:startIconDrawable="@android:drawable/ic_lock_lock">
 
-            <TextView
-                android:id="@+id/tvForgot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Forgot Password?"
-                android:textColor="#1565C0"
-                android:textStyle="bold" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Password"
+                            android:textSize="16sp"
+                            android:inputType="textPassword" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Forgot password -->
+                    <TextView
+                        android:id="@+id/tvForgot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="10dp"
+                        android:text="Forgot Password?"
+                        android:textColor="#1565C0"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <!-- Login button -->
+                    <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:layout_marginTop="22dp"
+                        android:background="@drawable/bg_button"
+                        android:backgroundTint="@null"
+                        android:text="LOGIN"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!-- Divider -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="26dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:background="#EEF1F5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:text="or"
+                            android:textColor="#B0B8C1"
+                            android:textSize="13sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:background="#EEF1F5" />
+
+                    </LinearLayout>
+
+                    <!-- Register link -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Don't have an account? "
+                            android:textColor="#8C97A3"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvRegister"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Create Account"
+                            android:textColor="#1565C0"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

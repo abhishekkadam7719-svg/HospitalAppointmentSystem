@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="6dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp"
+    app:strokeColor="#EEF1F5"
+    app:strokeWidth="1dp"
+    app:cardBackgroundColor="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,89 +17,196 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvDoctorName"
-            android:layout_width="wrap_content"
+        <!-- Header: doctor name + status badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Doctor Name"
-            android:textStyle="bold"
-            android:textSize="22sp"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvPatientName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Patient: Abhishek"
-            android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvDoctorName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Doctor Name"
+                android:textColor="#1A2B3C"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date: 29/07/2026"
-            android:textSize="16sp"/>
+            <LinearLayout
+                android:id="@+id/statusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_status_pending"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
 
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time: 12:45"
-            android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending"
+                    android:textColor="#F57C00"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone: 9876543210"
-            android:textSize="16sp"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#F1F3F6" />
+
+        <!-- Details -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Status: Pending"
-            android:textColor="#FF9800"
-            android:textStyle="bold"
-            android:textSize="17sp"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="👤"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvPatientName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="Abhishek"
+                android:textColor="#3D4A57"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:layout_marginTop="9dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <Button
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="📅"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="29/07/2026"
+                android:textColor="#3D4A57"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="🕒"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="12:45"
+                android:textColor="#3D4A57"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="📞"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="9876543210"
+                android:textColor="#3D4A57"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
                 android:id="@+id/btnApprove"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_margin="4dp"
-                android:layout_weight="1.1"
-                android:maxLines="1"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_btn_approve"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Approve"
-                android:textAllCaps="false" />
+                android:textColor="@android:color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnReject"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="44dp"
                 android:layout_weight="1"
-                android:layout_margin="4dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_btn_reject"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Reject"
-                android:textAllCaps="false"
-                android:maxLines="1"/>
+                android:textColor="#E53935"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnDelete"
-                android:layout_width="2dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:layout_margin="4dp"
-                android:text="Delete"
-                android:textAllCaps="false"
-                android:maxLines="1"/>
+                android:layout_width="48dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_btn_delete"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="🗑"
+                android:textColor="#5C6B7A"
+                android:textSize="18sp" />
 
         </LinearLayout>
 

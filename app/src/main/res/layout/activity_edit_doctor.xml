@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Doctor"
+            android:text="Edit Doctor"
             android:textColor="#1A2B3C"
             android:textStyle="bold"
             android:textSize="26sp" />
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="24dp"
-            android:text="Fill in the doctor's details below"
+            android:text="Update the doctor's details below"
             android:textColor="#8C97A3"
             android:textSize="13sp" />
 
@@ -65,7 +65,7 @@
                 android:id="@+id/etHospital"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Hospital Name" />
+                android:hint="Hospital" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,8 +86,7 @@
                     android:id="@+id/etExperience"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Experience (Yrs)"
-                    android:inputType="number" />
+                    android:hint="Experience (Yrs)" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +97,7 @@
                 android:layout_marginStart="6dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etFee"
+                    android:id="@+id/etFees"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Fee (₹)"
@@ -108,7 +107,6 @@
 
         </LinearLayout>
 
-        <!-- Rating -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,34 +121,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone Number"
-                android:inputType="phone" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Doctor Image URL" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Availability Status -->
+        <!-- Availability -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -170,16 +141,32 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp" />
 
+        <!-- Update button -->
         <Button
-            android:id="@+id/btnSaveDoctor"
+            android:id="@+id/btnUpdateDoctor"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/bg_button"
-            android:text="Add Doctor"
+            android:text="Update Doctor"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Delete button -->
+        <TextView
+            android:id="@+id/btnDeleteDoctor"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_btn_reject"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="Delete Doctor"
+            android:textColor="#E53935"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
     </LinearLayout>

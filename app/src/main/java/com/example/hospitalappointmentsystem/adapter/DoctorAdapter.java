@@ -16,19 +16,18 @@ import com.example.hospitalappointmentsystem.R;
 import com.example.hospitalappointmentsystem.model.Doctor;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
 
-    public void filterList(ArrayList<Doctor> filteredList) {
-        doctorList = filteredList;
-        notifyDataSetChanged();
+    private ArrayList<Doctor> doctorList;
+
+    public DoctorAdapter(ArrayList<Doctor> doctorList) {
+        this.doctorList = doctorList;
     }
 
-    private List<Doctor> doctorList;
-
-    public DoctorAdapter(List<Doctor> doctorList) {
-        this.doctorList = doctorList;
+    public void filterList(ArrayList<Doctor> filteredList) {
+        this.doctorList = filteredList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -49,9 +48,11 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.tvDoctorName.setText(doctor.getName());
         holder.tvSpecialization.setText(doctor.getSpecialization());
         holder.tvHospital.setText(doctor.getHospital());
-        holder.tvRating.setText("⭐ " + doctor.getRating());        holder.tvExperience.setText("Experience: " + doctor.getExperience());
+        holder.tvExperience.setText("Experience: " + doctor.getExperience());
         holder.tvFees.setText("Consultation Fee: ₹" + doctor.getFees());
         holder.tvAvailability.setText(doctor.getAvailability());
+        holder.tvRating.setText("⭐ " + doctor.getRating());
+
         String imageName = doctor.getImage();
 
         if (imageName != null && !imageName.isEmpty()) {
@@ -79,37 +80,46 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
             intent.putExtra("doctorName", doctor.getName());
             intent.putExtra("specialization", doctor.getSpecialization());
+            intent.putExtra("hospital", doctor.getHospital());
+            intent.putExtra("experience", doctor.getExperience());
             intent.putExtra("fees", doctor.getFees());
+            intent.putExtra("rating", doctor.getRating());
+            intent.putExtra("availability", doctor.getAvailability());
             intent.putExtra("doctorImage", doctor.getImage());
+
             v.getContext().startActivity(intent);
 
         });
-
-
     }
 
     @Override
     public int getItemCount() {
-        return doctorList.size();
+        return doctorList == null ? 0 : doctorList.size();
     }
 
     public static class DoctorViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgDoctor;
-        TextView tvDoctorName, tvSpecialization, tvExperience, tvFees, tvAvailability, tvHospital, tvRating;
+        TextView tvDoctorName;
+        TextView tvSpecialization;
+        TextView tvHospital;
+        TextView tvExperience;
+        TextView tvFees;
+        TextView tvAvailability;
+        TextView tvRating;
         Button btnBook;
 
         public DoctorViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvHospital = itemView.findViewById(R.id.tvHospital);
-            tvRating = itemView.findViewById(R.id.tvRating);
             imgDoctor = itemView.findViewById(R.id.imgDoctor);
             tvDoctorName = itemView.findViewById(R.id.tvDoctorName);
             tvSpecialization = itemView.findViewById(R.id.tvSpecialization);
+            tvHospital = itemView.findViewById(R.id.tvHospital);
             tvExperience = itemView.findViewById(R.id.tvExperience);
             tvFees = itemView.findViewById(R.id.tvFees);
             tvAvailability = itemView.findViewById(R.id.tvAvailability);
+            tvRating = itemView.findViewById(R.id.tvRating);
             btnBook = itemView.findViewById(R.id.btnBook);
         }
     }

@@ -4,22 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#F5F0F7"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="16dp"
         android:text="Doctors"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#1565C0"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="#1A2B3C"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerDoctors"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp"/>
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false" />
 
 </LinearLayout>
