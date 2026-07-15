@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.hospitalappointmentsystem.AppointmentActivity;
 import com.example.hospitalappointmentsystem.R;
 import com.example.hospitalappointmentsystem.model.Doctor;
@@ -53,20 +54,15 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.tvAvailability.setText(doctor.getAvailability());
         holder.tvRating.setText("⭐ " + doctor.getRating());
 
-        String imageName = doctor.getImage();
+        String imageUrl = doctor.getImage();
 
-        if (imageName != null && !imageName.isEmpty()) {
+        if (imageUrl != null && !imageUrl.isEmpty()) {
 
-            int imageRes = holder.itemView.getContext().getResources()
-                    .getIdentifier(imageName,
-                            "drawable",
-                            holder.itemView.getContext().getPackageName());
-
-            if (imageRes != 0) {
-                holder.imgDoctor.setImageResource(imageRes);
-            } else {
-                holder.imgDoctor.setImageResource(R.drawable.doctor1);
-            }
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.doctor1)
+                    .error(R.drawable.doctor1)
+                    .into(holder.imgDoctor);
 
         } else {
 
