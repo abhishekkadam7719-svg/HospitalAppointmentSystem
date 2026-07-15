@@ -393,13 +393,15 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtViewAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View all →"
                     android:textColor="#1565C0"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
-
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

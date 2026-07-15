@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private BottomNavigationView bottomNav;
     private SearchView searchView;
+    private TextView txtViewAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,16 @@ public class HomeActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         recyclerTopDoctors = findViewById(R.id.recyclerTopDoctors);
         bottomNav = findViewById(R.id.bottomNav);
+        searchView = findViewById(R.id.searchView);
+        recyclerTopDoctors = findViewById(R.id.recyclerTopDoctors);
+        bottomNav = findViewById(R.id.bottomNav);
+
+        txtViewAll = findViewById(R.id.txtViewAll);
+
+        txtViewAll.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, DoctorActivity.class);
+            startActivity(intent);
+        });
 
         recyclerTopDoctors.setLayoutManager(new LinearLayoutManager(this));
 
