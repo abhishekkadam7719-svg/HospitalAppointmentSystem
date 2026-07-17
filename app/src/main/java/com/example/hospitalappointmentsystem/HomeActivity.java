@@ -17,6 +17,7 @@ import com.example.hospitalappointmentsystem.adapter.DoctorAdapter;
 import com.example.hospitalappointmentsystem.model.Doctor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -33,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
     private SearchView searchView;
     private TextView txtViewAll;
+    private FloatingActionButton fabSymptomChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +61,19 @@ public class HomeActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
 
         txtViewAll = findViewById(R.id.txtViewAll);
+        fabSymptomChecker = findViewById(R.id.fabSymptomChecker);
 
         txtViewAll.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, DoctorActivity.class);
             startActivity(intent);
+        });
+
+        // AI Symptom Checker FAB
+        fabSymptomChecker.setOnClickListener(v -> {
+
+            Intent intent = new Intent(HomeActivity.this, SymptomCheckerActivity.class);
+            startActivity(intent);
+
         });
 
         recyclerTopDoctors.setLayoutManager(new LinearLayoutManager(this));

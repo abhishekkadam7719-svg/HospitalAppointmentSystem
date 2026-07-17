@@ -431,4 +431,18 @@
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <!-- AI Symptom Checker FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSymptomChecker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_ai_chat"
+        app:backgroundTint="#1565C0"
+        app:tint="@android:color/white"
+        android:contentDescription="AI Symptom Checker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

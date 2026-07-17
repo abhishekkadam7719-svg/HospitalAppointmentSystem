@@ -54,20 +54,23 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
         holder.tvAvailability.setText(doctor.getAvailability());
         holder.tvRating.setText("⭐ " + doctor.getRating());
 
-        String imageUrl = doctor.getImage();
+        String imageName = doctor.getImage();
 
-        if (imageUrl != null && !imageUrl.isEmpty()) {
+        if (imageName != null && !imageName.isEmpty()) {
 
-            Glide.with(holder.itemView.getContext())
-                    .load(imageUrl)
-                    .placeholder(R.drawable.doctor1)
-                    .error(R.drawable.doctor1)
-                    .into(holder.imgDoctor);
+            int imageResId = holder.itemView.getContext()
+                    .getResources()
+                    .getIdentifier(imageName, "drawable",
+                            holder.itemView.getContext().getPackageName());
+
+            if (imageResId != 0) {
+                holder.imgDoctor.setImageResource(imageResId);
+            } else {
+                holder.imgDoctor.setImageResource(R.drawable.doctor1);
+            }
 
         } else {
-
             holder.imgDoctor.setImageResource(R.drawable.doctor1);
-
         }
 
         holder.btnBook.setOnClickListener(v -> {
