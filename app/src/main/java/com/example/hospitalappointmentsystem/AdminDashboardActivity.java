@@ -31,6 +31,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private TextView tvDoctors, tvPatients, tvAppointments, tvPending;
+    private TextView tvViewAllAppointments;
 
     private MaterialCardView btnAddDoctor;
     private MaterialCardView btnManageAppointments;
@@ -42,7 +43,6 @@ public class AdminDashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,6 +69,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         tvPatients = findViewById(R.id.tvPatients);
         tvAppointments = findViewById(R.id.tvAppointments);
         tvPending = findViewById(R.id.tvPending);
+        tvViewAllAppointments = findViewById(R.id.tvViewAllAppointments);
 
         btnAddDoctor = findViewById(R.id.btnAddDoctor);
         btnManageAppointments = findViewById(R.id.btnManageAppointments);
@@ -96,6 +97,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         btnManageDoctors.setOnClickListener(v ->
                 startActivity(new Intent(this, ManageDoctorsActivity.class)));
+
+        tvViewAllAppointments.setOnClickListener(v ->
+                startActivity(new Intent(this, ManageAppointmentsActivity.class)));
     }
 
     private void loadDashboardCounts() {

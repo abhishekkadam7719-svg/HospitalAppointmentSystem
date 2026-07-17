@@ -56,9 +56,6 @@ public class HomeActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         recyclerTopDoctors = findViewById(R.id.recyclerTopDoctors);
         bottomNav = findViewById(R.id.bottomNav);
-        searchView = findViewById(R.id.searchView);
-        recyclerTopDoctors = findViewById(R.id.recyclerTopDoctors);
-        bottomNav = findViewById(R.id.bottomNav);
 
         txtViewAll = findViewById(R.id.txtViewAll);
         fabSymptomChecker = findViewById(R.id.fabSymptomChecker);
@@ -103,11 +100,8 @@ public class HomeActivity extends AppCompatActivity {
 
         // Categories
         cardHeart.setOnClickListener(v -> filterDoctorsByCategory("Cardiologist"));
-
         cardDental.setOnClickListener(v -> filterDoctorsByCategory("Dentist"));
-
         cardEye.setOnClickListener(v -> filterDoctorsByCategory("Ophthalmologist"));
-
         cardBone.setOnClickListener(v -> filterDoctorsByCategory("Orthopedic"));
 
         // Bottom Navigation
@@ -128,6 +122,11 @@ public class HomeActivity extends AppCompatActivity {
             } else if (id == R.id.nav_appointments) {
 
                 startActivity(new Intent(HomeActivity.this, MyAppointmentsActivity.class));
+                return true;
+
+            } else if (id == R.id.nav_ambulance) {
+
+                startActivity(new Intent(HomeActivity.this, AmbulanceActivity.class));
                 return true;
 
             } else if (id == R.id.nav_profile) {
@@ -158,7 +157,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 });
     }
-    // Search Doctors
+
     private void searchDoctors(String text) {
 
         if (text == null || text.trim().isEmpty()) {
@@ -183,7 +182,6 @@ public class HomeActivity extends AppCompatActivity {
         adapter.filterList(filteredList);
     }
 
-    // Filter Doctors by Category
     private void filterDoctorsByCategory(String specialization) {
 
         ArrayList<Doctor> filteredList = new ArrayList<>();
